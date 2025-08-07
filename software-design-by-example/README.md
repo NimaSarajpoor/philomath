@@ -129,4 +129,48 @@ How can we enhance the second bullet point above? In other words, how can we cre
 
 **Note:** finding any pair of different messages that yield the same hash value (a collision) is also infeasible: a cryptographic hash is expected to have a collision resistance strength of `n/2 bits` (lower due to the birthday paradox).
 
-**Note:** With use of CHF, we can use the "You Look Only Once" as we only need need to get hash of each file once, and that's it. Since we do not have collision, we know that all files in a group have identical content. So, the time complexity is `O(N)`. 
+**Note:** With `CHF`, we need to "ONLY LOOK ONCE" as we just need to get hash of each file once, and that's it. Since we do not have collision, we know that all files in a group have identical content. So, the time complexity is `O(N)`. We can use SHA-256 as a cryptographic hash function. It should be easy to revise the code in `duplicate_files_v2.py` to use SHA-256 instead of MD5.
+
+**Question-1:** Write a function that calculates the SHA-256 hash code of each unique line of a text file. <br>
+Let's use ChatGPT to help us with that!
+
+```python
+import hashlib
+
+def hash_unique_lines(file_path):
+    unique_lines = set()
+    line_hashes = {}
+
+    # Read lines and store only unique ones
+    with open(file_path, 'r', encoding='utf-8') as file:
+        for line in file:
+            clean_line = line.rstrip('\n')  # Remove trailing newline
+            if clean_line not in unique_lines:
+                unique_lines.add(clean_line)
+                hash_object = hashlib.sha256(clean_line.encode('utf-8'))
+                line_hashes[clean_line] = hash_object.hexdigest()
+
+    return line_hashes
+```
+
+**Question-2:** Convert the hex digests of those hash codes to integers. <br>
+Again... ChatGPT can help us with that!
+
+```python
+def hex_to_int(hex_string):
+    return int(hex_string, base=16)  
+    # to convert hex to int correctly without throwing an error 
+```
+
+**Question-3:** Plot histogram of the integer values using 20 bins. <br>
+
+```python
+import matplotlib.pyplot as plt
+
+def plot_histogram(int_values):
+    plt.hist(int_values, bins=20)
+    plt.xlabel('Hash Value (Integer)')
+    plt.ylabel('Frequency')
+    plt.title('Histogram of SHA-256 Hash Values')
+    plt.show()
+```
