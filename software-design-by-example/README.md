@@ -174,3 +174,25 @@ def plot_histogram(int_values):
     plt.title('Histogram of SHA-256 Hash Values')
     plt.show()
 ```
+
+
+### Pattern Matching
+
+Pattern Matching can help with finding a set of texts that follow a particular pattern. For instance, `*.txt` basically means that we want all files whose names end with `.txt`. This is called `globbing`, the action of using wildcards. But..you probably have heard of `regular expression` too. So, let's understand their difference. 
+
+**globbing vs regular expression:** <br>
+Below you can read a quick explanation.
+
+* **regular expression:** Primarily used for searching, manipulating, and validating patterns within text strings. They are a powerful tool for complex text processing. Operate on the content of strings, not typically on filenames directly in a shell context.
+
+* **globbing:** Primarily used by command-line shells to match filenames or directory names based on simple wildcard patterns. Operates on file and directory names within a filesystem. Python also has a module called `glob` for tasks that requires finding matches in filenames.
+
+
+**How does globbing work?** <br>
+If we put aside the wildcard (or special characters), then globbing tries to find matches from left to right. If the first character does not match, it just stops. If there is matching, then the next character will be checked, and so on. Now we want to write a program that does this for us. First thing first, should we write a `function` or `OOP`? Since we want to track the progress and each time we need to check the remaining characters in string, it makes sense to go with `OOP`. 
+
+```python
+class globber:
+    pass # TBC
+```
+
